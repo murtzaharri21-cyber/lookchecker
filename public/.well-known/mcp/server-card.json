@@ -1,0 +1,20 @@
+{
+  "format": "Look Checker static website discovery manifest",
+  "name": "Look Checker",
+  "version": "1.0.0",
+  "endpoint": "https://lookchecker.com/",
+  "endpointType": "website",
+  "description": "Look Checker is a static website with a browser-only WebMCP tool. This URL is the website entry point, not a remote MCP transport endpoint.",
+  "capabilities": {
+    "webmcp": {
+      "availableInBrowser": true,
+      "tools": [
+        {
+          "name": "look_checker_search_pages",
+          "description": "Find public Look Checker pages about tools, methods, privacy, pricing, and guides."
+        }
+      ]
+    },
+    "remoteMcp": false
+  }
+}

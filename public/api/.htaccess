@@ -1,0 +1,9 @@
+<IfModule mod_mime.c>
+  <Files "health">
+    ForceType application/json
+  </Files>
+</IfModule>
+
+<IfModule mod_headers.c>
+  Header always set X-Robots-Tag "noindex, nofollow"
+</IfModule>

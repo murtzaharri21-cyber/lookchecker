@@ -1,0 +1,64 @@
+# Look Checker
+
+> Look Checker provides free, browser-based tools for exploring visible facial proportions and personal style. Photo analysis runs on the visitor's device; photos selected for scans are not uploaded.
+
+This file is a short guide to the site's public pages. Use the sitemap for the complete canonical URL list.
+
+## Content use
+- Search engine crawling and indexing: allowed.
+- AI model training: not permitted.
+
+## Site information
+- [Home and free tools](https://lookchecker.com/) — Overview of the site's browser-based tools
+- [About](https://lookchecker.com/about) — Measurement approach and limitations
+- [Tools directory](https://lookchecker.com/tools) — Directory of browser-based tools
+- [Sample report](https://lookchecker.com/sample-report) — Example report with explanations of measurements
+- [Pricing](https://lookchecker.com/pricing) — Free tools and available features
+- [Privacy](https://lookchecker.com/privacy) — Photo processing, privacy, and saved report information
+- [AI Beauty Studio](https://lookchecker.com/beauty-studio) — Beauty tools and privacy overview
+- [AI Beauty Studio guides](https://lookchecker.com/beauty-studio/guides) — Practical guides for Beauty Studio tools
+- [Face, style, and hairline guides](https://lookchecker.com/guides) — Guidance about face shape, style, and hairline checks
+
+## Free analysis tools
+- [Face shape](https://lookchecker.com/tools/face-shape)
+- [Attractiveness](https://lookchecker.com/tools/attractiveness)
+- [Symmetry](https://lookchecker.com/tools/symmetry)
+- [Golden ratio](https://lookchecker.com/tools/golden-ratio)
+- [Jawline score](https://lookchecker.com/tools/jawline-score)
+- [Canthal tilt](https://lookchecker.com/tools/canthal-tilt)
+- [Eye shape](https://lookchecker.com/tools/eye-shape)
+- [Facial ratios](https://lookchecker.com/tools/facial-ratios)
+- [Hair and hairline check](https://lookchecker.com/tools/hairstyle-finder)
+- [Makeup suggestions](https://lookchecker.com/tools/makeup-suggestions)
+- [Full dress check](https://lookchecker.com/tools/full-dress-check)
+- [Skin analysis](https://lookchecker.com/tools/skin-analysis)
+- [Pretty scale](https://lookchecker.com/tools/pretty-scale)
+- [Glow up](https://lookchecker.com/tools/glow-up)
+- [Eyebrow mapping](https://lookchecker.com/tools/eyebrow-mapping)
+- [True mirror](https://lookchecker.com/tools/true-mirror)
+- [Full analysis](https://lookchecker.com/tools/full-analysis)
+
+## Face, style, and hairline guides
+- [Face shape and hairstyle guide](https://lookchecker.com/guides/face-shape-hairstyle)
+- [Hairline check guide](https://lookchecker.com/guides/hairline-check)
+- [Glow-up tips](https://lookchecker.com/guides/glow-up-tips)
+- [Glasses for face shape](https://lookchecker.com/guides/glasses-for-face-shape)
+
+## AI Beauty Studio tool guides
+- [Hairstyle try-on](https://lookchecker.com/beauty-studio/guides/hairstyle-try-on)
+- [Hair color preview](https://lookchecker.com/beauty-studio/guides/hair-color-preview)
+- [Beard style preview](https://lookchecker.com/beauty-studio/guides/beard-style-preview)
+- [Makeup try-on](https://lookchecker.com/beauty-studio/guides/makeup-try-on)
+- [Custom makeup guide](https://lookchecker.com/beauty-studio/guides/custom-makeup-guide)
+- [Skin analysis guide](https://lookchecker.com/beauty-studio/guides/skin-analysis-guide)
+- [Face shape analysis guide](https://lookchecker.com/beauty-studio/guides/face-shape-analysis-guide)
+- [Face shape haircut guide](https://lookchecker.com/beauty-studio/guides/face-shape-haircut-guide)
+
+## How to interpret results
+- Measurements and suggestions describe visible features in a single image. They are estimates, not medical advice or judgments of personal worth.
+- Photo quality, lighting, pose, and occlusion can affect analysis.
+- Saved reports are optional and contain measurements, not the original photo.
+
+## Crawl information
+- [XML sitemap](https://lookchecker.com/sitemap.xml)
+- [Robots rules](https://lookchecker.com/robots.txt)

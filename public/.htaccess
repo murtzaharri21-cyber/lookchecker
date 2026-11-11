@@ -1,0 +1,120 @@
+DirectoryIndex index.html
+ErrorDocument 404 /404.html
+
+<IfModule mod_dir.c>
+  # Prevent Apache from automatically adding trailing slashes to directories
+  # This stops Apache from redirecting /tools to /tools/ and creating redirect loops!
+  DirectorySlash Off
+</IfModule>
+
+Options -Indexes
+
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteBase /
+
+  # 1. Known legacy / probed 404 URLs -> direct 301 redirect to canonical homepage
+  RewriteRule ^en(/.*)?$ https://lookchecker.com/ [R=301,L]
+  RewriteRule ^100/?$ https://lookchecker.com/ [R=301,L]
+
+  # 2. Enforce canonical non-www domain (redirect www.lookchecker.com -> lookchecker.com)
+  RewriteCond %{HTTP_HOST} ^www\.lookchecker\.com$ [NC]
+  RewriteRule ^(.*)$ https://lookchecker.com/$1 [R=301,L]
+
+  # 3. Enforce HTTPS
+  RewriteCond %{HTTPS} !=on
+  RewriteRule ^(.*)$ https://lookchecker.com/$1 [R=301,L]
+
+  # 4. Strip trailing slashes from any URL (e.g. /tools/ -> /tools, /about/ -> /about)
+  # Exclude root "/"
+  RewriteCond %{REQUEST_METHOD} =GET
+  RewriteCond %{REQUEST_URI} ^/(.+)/+$
+  RewriteRule ^ https://lookchecker.com/%1 [R=301,L]
+
+  # 4b. Redirect direct requests for index.html to /
+  RewriteCond %{THE_REQUEST} ^[A-Z]{3,}\s/+index\.html[\s?] [NC]
+  RewriteRule ^(.*)index\.html$ https://lookchecker.com/$1 [R=301,L]
+
+  # 4c. Redirect direct requests for *.html to clean canonical URLs (e.g. /about.html -> /about)
+  RewriteCond %{THE_REQUEST} ^[A-Z]{3,}\s/+(.+?)\.html[\s?] [NC]
+  RewriteRule ^ https://lookchecker.com/%1 [R=301,L]
+
+  # Serve the Markdown homepage when a client explicitly requests it
+  RewriteCond %{HTTP_ACCEPT} text/markdown [NC]
+  RewriteRule ^$ home.md [L]
+
+  # 5. If request is a physical existing file, serve it directly
+  RewriteCond %{REQUEST_FILENAME} -f
+  RewriteRule ^ - [L]
+
+  # 6. Serve .html files for clean URLs (e.g. /about -> about.html, /tools -> tools.html)
+  RewriteCond %{DOCUMENT_ROOT}/$1.html -f
+  RewriteRule ^(.+?)$ $1.html [L]
+
+  # 7. If request is for an existing directory containing index.html, serve index.html
+  RewriteCond %{DOCUMENT_ROOT}/$1/index.html -f
+  RewriteRule ^(.+?)$ $1/index.html [L]
+</IfModule>
+
+<IfModule mod_headers.c>
+  Header always set Strict-Transport-Security "max-age=31536000"
+  Header always set Content-Security-Policy "connect-src 'self' blob: https://*.google-analytics.com https://*.analytics.google.com"
+  Header always set Link "<https://lookchecker.com/llms.txt>; rel=\"describedby\"; type=\"text/plain\", <https://lookchecker.com/home.md>; rel=\"alternate\"; type=\"text/markdown\"" env=IS_HOMEPAGE
+  Header always append Vary Accept env=IS_HOMEPAGE
+
+  # Send X-Robots-Tag: noindex, nofollow for any /api/ or /licenses/ request
+  SetEnvIf Request_URI "^/api/" IS_NOINDEX_REQ
+  SetEnvIf Request_URI "^/licenses/" IS_NOINDEX_REQ
+  Header always set X-Robots-Tag "noindex, nofollow" env=IS_NOINDEX_REQ
+
+  # Images and static media: 1 year cache
+  <FilesMatch "\.(?:avif|webp|png|jpe?g|ico|svg)$">
+    Header always set Cache-Control "public, max-age=31536000, stale-while-revalidate=86400"
+  </FilesMatch>
+
+  # Web fonts: 1 year immutable cache
+  <FilesMatch "\.(?:woff2?|eot|ttf|otf)$">
+    Header always set Cache-Control "public, max-age=31536000, immutable"
+    Header always set Access-Control-Allow-Origin "*"
+  </FilesMatch>
+</IfModule>
+
+<IfModule mod_expires.c>
+  ExpiresActive On
+  ExpiresDefault "access plus 1 month"
+  ExpiresByType text/html "access plus 0 seconds"
+  ExpiresByType text/css "access plus 1 year"
+  ExpiresByType application/javascript "access plus 1 year"
+  ExpiresByType text/javascript "access plus 1 year"
+  ExpiresByType image/webp "access plus 1 year"
+  ExpiresByType image/avif "access plus 1 year"
+  ExpiresByType image/jpeg "access plus 1 year"
+  ExpiresByType image/png "access plus 1 year"
+  ExpiresByType image/svg+xml "access plus 1 year"
+  ExpiresByType image/x-icon "access plus 1 year"
+  ExpiresByType font/woff2 "access plus 1 year"
+  ExpiresByType font/woff "access plus 1 year"
+  ExpiresByType application/font-woff2 "access plus 1 year"
+  ExpiresByType application/wasm "access plus 1 year"
+</IfModule>
+
+<IfModule mod_setenvif.c>
+  SetEnvIf Request_URI "^/$" IS_HOMEPAGE
+  SetEnvIf Request_URI "^/_next/static/" immutable_asset
+</IfModule>
+
+<IfModule mod_headers.c>
+  Header always set Cache-Control "public, max-age=31536000, immutable" env=immutable_asset
+</IfModule>
+
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/plain text/markdown text/html text/css text/xml text/javascript application/javascript application/json application/xml image/svg+xml application/wasm font/woff font/woff2 application/font-woff2
+</IfModule>
+
+<IfModule mod_brotli.c>
+  AddOutputFilterByType BROTLI_COMPRESS text/plain text/markdown text/html text/css text/xml text/javascript application/javascript application/json application/xml image/svg+xml application/wasm font/woff font/woff2 application/font-woff2
+</IfModule>
+
+<IfModule mod_mime.c>
+  AddType text/markdown .md
+</IfModule>
